@@ -7,6 +7,16 @@ def create_image_array(file_name):
     file_name as an input variable and returns a list
     with the given width and height.
     """
+    rgb = list()
+    with open(file_name) as f:
+        img_width = int(f.readline()) # hor len
+        img_height = int(f.readline()) # vert len
+        for h in range(img_height):
+            rgb.insert(h, list())
+            for _ in range(img_width):
+                rgb[h].append([int(x) for x in f.readline().split(",")])
+    return rgb
+        
 
 
 def xray_filter(numbers):
@@ -58,3 +68,4 @@ def create_border(**kargs):
     with the given red, green, blue at the beginning and end of "numbers".
     """
 
+print(create_image_array("test.txt"))

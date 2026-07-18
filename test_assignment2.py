@@ -116,3 +116,7 @@ def test_create_border_2():
                          blue=b,
                          pixel=pixel) ==\
            load_pickle_file(pickle_file_name)
+
+# Custom Unit Tests
+def test_create_img_arr():
+    assert create_image_array("test.txt") == [[[1,2,3],[4,5,6]], [[7,8,9],[10,11,12]]]
