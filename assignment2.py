@@ -47,6 +47,8 @@ def upside_down(numbers):
     Create a function called upside_down() that takes a list and
     reverses the list.
     """
+    numbers.reverse()
+    return numbers
 
 
 def vertical_flip(numbers):
@@ -55,6 +57,9 @@ def vertical_flip(numbers):
     takes a list and returns a list
     where values in each row are vertically flipped.
     """
+    for h in range(len(numbers)):
+        numbers[h].reverse()
+    return numbers
 
 
 def create_border(**kargs):
