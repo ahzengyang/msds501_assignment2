@@ -27,6 +27,7 @@ def xray_filter(numbers):
     g_value = 255 - g_value
     and b_value = 255 – b_value.
     """
+    return [[[255-v for v in numbers[h][w]] for w in range(len(numbers[h]))] for h in range(len(numbers))]
 
 
 def adjust_r_g_b(numbers, r_ratio, g_ratio, b_ratio):
