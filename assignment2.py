@@ -77,5 +77,17 @@ def create_border(**kargs):
     the "pixel" number of rows only consists
     with the given red, green, blue at the beginning and end of "numbers".
     """
-
-print(create_image_array("test.txt"))
+    img = kargs.get("numbers")
+    if img == None: # exit if img array not provided
+        return
+    rgb = [kargs.get("red", 128), kargs.get("green", 0), kargs.get("blue", 128)] # purple default
+    border_len = kargs.get("pixel", 1)
+    for h in range(len(img)): # add L/R border
+        for i in range(border_len):
+            img[h].insert(0, rgb)
+            img[h].append(rgb)
+    border = [rgb for _ in range(len(img[0]))] # add T/B border
+    for i in range(border_len):
+        img.insert(i, border)
+        img.append(border)
+    return img
