@@ -120,3 +120,11 @@ def test_create_border_2():
 # Custom Unit Tests
 def test_create_img_arr():
     assert create_image_array("test.txt") == [[[1,2,3],[4,5,6]], [[7,8,9],[10,11,12]]]
+
+def test_copy_img():
+    assert copy_image(create_image_array("test.txt")) == [[[1,2,3],[4,5,6]], [[7,8,9],[10,11,12]]]
+
+def test_upside_down_custom():
+    assert upside_down([[[1,2,3],[5,6,7],[9,10,11]],  
+                        [[11,12,13],[15,16,17],[19,20,21]]]) == [[[11, 12, 13], [15, 16, 17], [19, 20, 21]],
+                                                                 [[1, 2, 3], [5, 6, 7], [9, 10, 11]]]

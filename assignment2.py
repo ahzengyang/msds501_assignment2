@@ -1,6 +1,13 @@
 # DO NOT ADD ANY OTHER PACKAGES AND LIBRARIES
 
 
+def copy_image(img):
+    """
+    Returns a copy of the 3D list img
+    """
+    return [[[v for v in img[h][w]] for w in range(len(img[h]))] for h in range(len(img))]
+
+
 def create_image_array(file_name):
     """
     Create a function called create_image_array() which takes
@@ -16,7 +23,6 @@ def create_image_array(file_name):
             for _ in range(img_width):
                 rgb[h].append([int(x) for x in f.readline().split(",")])
     return rgb
-        
 
 
 def xray_filter(numbers):
@@ -36,10 +42,11 @@ def adjust_r_g_b(numbers, r_ratio, g_ratio, b_ratio):
     three float values that are multiplied to r,g, and b values accordingly.
     The adjusted value should be rounded to an integer.
     """
-    for h in range(len(numbers)):
-        for w in range(len(numbers[h])):
-            numbers[h][w] = [round(o * a) for o, a in zip(numbers[h][w], [r_ratio, g_ratio, b_ratio])]
-    return numbers
+    mod = copy_image(numbers)
+    for h in range(len(mod)):
+        for w in range(len(mod[h])):
+            mod[h][w] = [round(o * a) for o, a in zip(mod[h][w], [r_ratio, g_ratio, b_ratio])]
+    return mod
 
 
 def upside_down(numbers):
@@ -47,8 +54,9 @@ def upside_down(numbers):
     Create a function called upside_down() that takes a list and
     reverses the list.
     """
-    numbers.reverse()
-    return numbers
+    mod = copy_image(numbers)
+    mod.reverse()
+    return mod
 
 
 def vertical_flip(numbers):
@@ -57,9 +65,10 @@ def vertical_flip(numbers):
     takes a list and returns a list
     where values in each row are vertically flipped.
     """
-    for h in range(len(numbers)):
-        numbers[h].reverse()
-    return numbers
+    mod = copy_image(numbers)
+    for h in range(len(mod)):
+        mod[h].reverse()
+    return mod
 
 
 def create_border(**kargs):
@@ -80,14 +89,15 @@ def create_border(**kargs):
     img = kargs.get("numbers")
     if img == None: # exit if img array not provided
         return
+    mod = copy_image(img)
     rgb = [kargs.get("red", 128), kargs.get("green", 0), kargs.get("blue", 128)] # purple default
     border_len = kargs.get("pixel", 1)
-    for h in range(len(img)): # add L/R border
+    for h in range(len(mod)): # add L/R border
         for i in range(border_len):
-            img[h].insert(0, rgb)
-            img[h].append(rgb)
-    border = [rgb for _ in range(len(img[0]))] # add T/B border
+            mod[h].insert(0, rgb)
+            mod[h].append(rgb)
+    border = [rgb for _ in range(len(mod[0]))] # add T/B border
     for i in range(border_len):
-        img.insert(i, border)
-        img.append(border)
-    return img
+        mod.insert(i, border)
+        mod.append(border)
+    return mod
